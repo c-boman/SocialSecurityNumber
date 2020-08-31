@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace SocialSecurityNumber
 {
@@ -7,10 +8,22 @@ namespace SocialSecurityNumber
     {
         static void Main(string[] args)
         {
-            
-            Console.Write("Enter your 10 digit social security number (YYMMDDXXX): ");
 
-            string socialSecurityNumber = Console.ReadLine();
+            string socialSecurityNumber ="";
+            if (args.Length > 0) //then the user already entered in their security number through cmd.
+            {
+                socialSecurityNumber = args[0];
+                Console.WriteLine();
+                writeCenteredText("You entered in the social security number: " + args[0]);
+                
+            }
+            else //if the user didn't already enter in their security number at startup, then ask for it:
+            {
+                Console.Write("Enter your 10 digit social security number (YYMMDDXXX): ");
+
+                socialSecurityNumber = Console.ReadLine();
+                Console.Clear();
+            }
 
             int age = 30;
             int userBirthday = int.Parse(socialSecurityNumber.Substring(0, 6));
@@ -30,13 +43,13 @@ namespace SocialSecurityNumber
             
             string gender = genderNumber % 2 == 0 ? "Female" : "Male";
 
-            //Console.WriteLine($"This is a {gender}, and the age is {age}.");
             Console.WriteLine();
             writeCenteredText("-------------------------------------------");
             Console.WriteLine();
             writeCenteredText($"This is a {gender}, and the age is {age}.");
             Console.WriteLine();
             writeCenteredText("-------------------------------------------");
+            Console.ReadLine();
         }
         static void writeCenteredText(String text)
         {
